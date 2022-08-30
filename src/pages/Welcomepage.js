@@ -1,7 +1,7 @@
 const Welcomepage = () => {
   return (
     <>
-      <h1>Welcome To SplitWise</h1>
+      <h1>Welcome To SplitWise {}</h1>
     </>
   );
 };

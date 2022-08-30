@@ -1,33 +1,41 @@
 import { useState } from "react";
-import Welcomepage from "./Welcomepage";
+// import { useNavigate } from "react-router-dom";
 
 function Loginpage() {
-  let [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({});
+  const [username1, setUsername1] = useState();
+  const [type, setType] = useState("password");
+
+  // const navigate = useNavigate();
   const Change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
+  function Eye() {
+    type === "password" ? setType("text") : setType("password");
+  }
   const handleClick = (event) => {
     event.preventDefault();
     console.log(inputs);
-
     Welcome();
-    return <Welcomepage />;
   };
 
   function Welcome() {
+    setUsername1(inputs.username);
     alert(`Welcome to Splitwise ${inputs.username}`);
+    window.location = "/Welcomepage";
   }
+
   return (
     <>
       <form className="container" onSubmit={handleClick}>
         <div className="row">
-          <div className="col mt-3">Log in to SplitWise</div>
-          <div className="col-12 mt-2">
+          <div className="col-12 mt-3">Log in to SplitWise</div>
+          <div className=" mt-2 ">
             <input
-              className="ml-1"
+              className="ml-5 w-10 box"
               type="text"
               name="username"
               value={inputs.username || ""}
@@ -36,15 +44,20 @@ function Loginpage() {
             />
           </div>
 
-          <div className="col-12 mt-3">
+          <div className=" mt-3 ml-5 outline1 ">
             <input
-              className="ml-1"
-              type="password"
+              className=" outline "
+              type={type}
               name="password"
               value={inputs.password || ""}
               placeholder="Password"
               onChange={Change}
             />
+            {type === "password" ? (
+              <i class="fa-regular fa-eye" onClick={Eye}></i>
+            ) : (
+              <i className="fa-regular fa-eye-slash" onClick={Eye}></i>
+            )}
           </div>
 
           <div className="col mt-5 mb-5 ">
@@ -55,5 +68,4 @@ function Loginpage() {
     </>
   );
 }
-
 export default Loginpage;

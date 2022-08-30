@@ -5,3 +5,18 @@
   text-align:center ;
   border: 1px solid ;
 }
+.outline{
+  border: none;
+  padding: 3px 0 2px 5px;
+  
+}
+.outline1{
+  border: 1px solid;
+  width: 73%;
+}
+.box{
+  width: 90.8%;
+}
+input:focus{
+  outline: none;
+}
