@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { NameContext } from "./Loginpage";
 
 const Welcomepage = () => {
-  const Name = useContext(NameContext);
+  const { username1 } = useContext(NameContext);
   return (
     <>
-      <h1>Welcome To SplitWise {Name}</h1>
+      <h1 className="textAlignCenter">Welcome To SplitWise {username1} </h1>
     </>
   );
 };

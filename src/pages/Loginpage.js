@@ -1,11 +1,11 @@
-import { createContext, useState } from "react";
-export const NameContext = createContext();
+import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Loginpage() {
   const [inputs, setInputs] = useState({});
-  const [username1, setUsername1] = useState();
   const [type, setType] = useState("password");
-
+  const { setUsername1 } = useContext(NameContext);
+  const navigate = useNavigate();
   const Change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -24,13 +24,7 @@ function Loginpage() {
   function Welcome() {
     setUsername1(inputs.username);
     alert(`Welcome to Splitwise ${inputs.username}`);
-    // NameProvider();
-    window.location = "/Welcomepage";
-  }
-  function NameProvider() {
-    <NameContext.Provider username={username1}>
-      {console.log(username1)};
-    </NameContext.Provider>;
+    navigate("/Welcomepage");
   }
 
   return (
@@ -73,7 +67,19 @@ function Loginpage() {
     </>
   );
 }
+
 // export function NameProvider() {
 //   const nameContext = useContext(NameContext);
 // }
 export default Loginpage;
+
+export const NameContext = createContext();
+export const NameProvider = ({ children }) => {
+  const [username1, setUsername1] = useState();
+
+  return (
+    <NameContext.Provider value={{ username1, setUsername1 }}>
+      {children}
+    </NameContext.Provider>
+  );
+};
